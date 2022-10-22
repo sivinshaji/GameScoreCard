@@ -1,0 +1,125 @@
+
+@font-face {
+    font-family: myCalculatorFont;
+    src: url(CursedTimerUlil-Aznm.ttf);
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;400;500;600;700;800;900&display=swap');
+
+body
+{
+    font-family: Poppins;
+}
+
+.game-card
+{
+    width: 600px;
+    min-height: 60vh;
+    background-color: #325;
+    color: #cfcfcf;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.container
+{
+    border-radius: 15px;
+    display: flex;
+    justify-content: space-around;
+    margin: 0px auto;
+}
+
+.team-card
+{
+    margin: 0%;
+    padding: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-content: flex-start;
+}
+
+.card-title
+{
+    text-align: center;
+    font-weight: 800;
+    letter-spacing: 3px;
+}
+
+.score-display
+{
+    width: 100px;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #233;
+    
+    font-size: 3rem;
+    margin: 0 auto;
+}
+#score1
+{
+    width: 90px;
+    background-color: transparent;
+    border: none;
+    cursor: default;
+    font-size: 3rem;
+    color: #fcfcfc;
+    font-family: myCalculatorFont;
+    text-align: center;
+    padding: 0%;
+}
+#score1:focus
+{
+    border: none;
+    outline: none;
+}
+#score2
+{
+    width: 90px;
+    background-color: transparent;
+    border: none;
+    cursor: default;
+    font-size: 3rem;
+    color: #fcfcfc;
+    font-family: myCalculatorFont;
+    text-align: center;
+    padding: 0%;
+}
+#score2:focus
+{
+    border: none;
+    outline: none;
+}
+
+.btn-style
+{
+    background-color: transparent;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    font-size: 0.7rem;
+    color: #fff;
+    padding: 10px;
+    margin: 25px 5px;
+
+    box-shadow: none;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    position: relative;
+    z-index: 25;
+}
+.btn-style:hover
+{
+    background-color: #fcfcfc;
+    color: #325;
+}
+
+  
+  .btn-style:active {
+    border:  solid 1px #325;
+    transition: all 0.3s ease-out;
+  }
