@@ -1,6 +1,6 @@
 
 
-//Score card functions
+//Game Score functions
 
 function addOne(team)
 {
@@ -33,6 +33,74 @@ function resetScore()
     document.getElementById('score2').value = `${0}`.padStart(2, '0');
 }
 
+//Blackjack Game functions
+
+function Blackjack(state)
+{
+    let GameState = state
+    let PlayerCards = []
+    let ComCards = []
+    let sumPlayerCard = 0;
+    let sumComCard = 0;
+
+
+    if(GameState)
+    {
+        // First two card selection
+        PlayerCards.push(randomCardSelector())
+        PlayerCards.push(randomCardSelector())
+        ComCards.push(randomCardSelector())
+        ComCards.push(randomCardSelector())
+
+        PlayerCards.forEach(n => {
+            sumPlayerCard += n
+        })
+        ComCards.forEach(n => {
+            sumComCard += n
+        })
+        
+        if(sumPlayerCard == 21 && sumComCard == 21)
+        {
+            document.getElementById('draw-cards').innerText = "Draw"
+        }
+        else if(sumPlayerCard == 21 || sumComCard > 21)
+        {
+            document.getElementById('draw-cards').innerText = `BlackJack You Win\nYour Cards: ${sumPlayerCard}\n Player Cards: ${sumComCard}`
+        }
+        else if(sumComCard == 21 || sumPlayerCard > 21)
+        {
+            document.getElementById('draw-cards').innerText = `BlackJack COM Win\nYour Cards: ${sumPlayerCard}\n Player Cards: ${sumComCard}`
+        }
+        else
+        {
+            document.getElementById('draw-cards').innerText = "Raise Bet or Show Card"
+        }
+
+        console.log(`Player Card Sum: ${sumPlayerCard} and Comp Card Sum: ${sumComCard}`);
+        document.getElementById('my-cards').innerText = `Your Cards: ${PlayerCards.toString(PlayerCards)}`
+    }
+    else
+    {
+        GameState = false
+    }
+    
+    
+}
+
+// Card Selection
+function randomCardSelector()
+{
+    let num = Math.floor((Math.random() * 12)+1)
+    return num
+}
+
+//View Card
+function viewPlayerCards()
+{
+    PlayerValueCards.forEach(n => {
+        document.getElementById('draw-cards').innerText += n + "-"
+    })
+}
 
 //Array Challenge Methods
 

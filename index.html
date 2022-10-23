@@ -10,69 +10,90 @@
     <title>Js Challenge</title>
 </head>
 <body>
+    <h1>Challenge</h1>
+    
+    <!-- Points Game -->
     <div>
-<!-- 
-        <h1>Js Challenge</h1>
-        <hr>
-        <h2>Challenge 1 - Sum of Array</h2>
+        <h2 style="text-align: center;"> 1️⃣ Game Card</h2>
 
-        <div>
-            <p>Input Array is [1,2,3,4,5]</p>
-            <p id="sum-result"></p>
-            <button onclick="sumOfArray()">Get the Sum</button>
-        </div>
-        <hr>
-
-        <h2>Challenge 2 - Biggest number in an Array</h2>
-        <div>
-            <p>Biggest Num in an Array</p>
-            <p id="biggest-num"></p>
-            <button onclick="findBiggest()">Find the Biggest Number</button>
-        </div>
-        <hr>
-
-        <h2>Challenge 3 - Filter Array</h2>
-        <div>
-            <p>Filter Odd Numbers form an Array</p>
-            <p id="new-array"></p>
-            <button onclick="arrayFilter()">Filtered Array</button>
-        </div>
-        <hr> -->
-
-        <h2>Challenge - Score Card</h2>
-        <div>
-            <h2 style="text-align: center;">My Score Card</h2>
-            <div class="game-card">
-                <div class="container">
-                    <div class="team-card">
-                        <h1 class="card-title">Team 1</h1>
-                        <div class="score-display">
-                            <input type="text" id="score1" value="00" readonly />
-                        </div>
-                        <div>
-                            <button class="btn-style" onclick="addOne('score1')">+1</button>
-                            <button class="btn-style" onclick="addTwo('score1')">+2</button>
-                            <button class="btn-style" onclick="addThree('score1')">+3</button>
-                        </div>
+        <div class="game-card">
+            <div class="container">
+                <div class="team-card">
+                    <h1 class="card-title">Team 1</h1>
+                    <div class="score-display">
+                        <input type="text" id="score1" value="00" readonly />
                     </div>
-                    <div class="team-card">
-                        <h1 class="card-title">Team 2</h1>
-                        <div class="score-display">
-                            <input type="text" id="score2" value="00" readonly />
-                        </div>
-                        <div>
-                            <button class="btn-style" onclick="addOne('score2')">+1</button>
-                            <button class="btn-style" onclick="addTwo('score2')">+2</button>
-                            <button class="btn-style" onclick="addThree('score2')">+3</button>
-                        </div>
+                    <div>
+                        <button class="btn-style" onclick="addOne('score1')">+1</button>
+                        <button class="btn-style" onclick="addTwo('score1')">+2</button>
+                        <button class="btn-style" onclick="addThree('score1')">+3</button>
                     </div>
                 </div>
-                <div>
-                    <button style="margin-bottom: 25px;" class="btn-style" onclick="resetScore()">New Game</button>
+                <div class="team-card">
+                    <h1 class="card-title">Team 2</h1>
+                    <div class="score-display">
+                        <input type="text" id="score2" value="00" readonly />
+                    </div>
+                    <div>
+                        <button class="btn-style" onclick="addOne('score2')">+1</button>
+                        <button class="btn-style" onclick="addTwo('score2')">+2</button>
+                        <button class="btn-style" onclick="addThree('score2')">+3</button>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <button style="margin-bottom: 25px;" class="btn-style" onclick="resetScore()">New Game</button>
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- Blackjack Game -->
+    <div>
+        <div>
+            <h2 style="text-align: center;"> 2️⃣ Simple Blackjack Game</h2>
+            <div class="blackjack-container">
+                <div id="blackjack-rule-card">
+                    <h3>Game Rules</h3>
+                    <ol id="rule-card">
+                        <li class="rule-set">Game starts with two random cards in hand</li>
+                        <li class="rule-set">Maximum Point limit is 21</li>
+                        <li class="rule-set">Sum of card value is less than 21 you can continue or call out.</li>
+                        <li class="rule-set">Sum of card value is 21 you can call blackjack or continue.</li>
+                        <li class="rule-set">Sum of card value is greater than 21 you can bluff or call out.</li>
+                        <li class="rule-set">Start with 50 points.</li>
+                        <li class="rule-set">Each bet is made with 10 points.</li>
+                        <li class="rule-set">Point reaches 0 will automaticaly disqualify player.</li>
+                    </ol>
+                </div>
+                <div id="game-option-card">
+                    <button class="btn-startgame" onclick="Blackjack(true)">New Game</button>
+                    <button class="btn-endgame" onclick="Blackjack(false)">End Game</button>
+                </div>
+                <div id="blackjack-card">
+                    <div class="draw-card-container">
+                        <h3 id="draw-cards"></h3>
+                        <h5 id="my-cards">Start Game</h5>
+                    </div>
+                    <div class="point-card">
+                        <p id="bet-points">Bet points: <span id="bet-value">10</span></p>
+                        <p id="current-points">My points: <span id="current-value">40</span></p>
+                    </div>
+                </div>
+                <div id="user-option-card">
+                    <button class="btn-place-bet">Raise Point</button>
+                    <button class="btn-pass-chance">Show Cards</button>
+                    <button class="btn-drop-game">Draw Card</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <hr>
+
+
+
     <script type="text/javascript" src="myScript.js"></script>
 </body>
 </html>
