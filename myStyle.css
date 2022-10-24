@@ -125,6 +125,11 @@ body
 
   /* Blackjack game cards */
 
+  .hidden
+  {
+    visibility: hidden;
+  }
+  
   .blackjack-container
   {
     padding: 25px;

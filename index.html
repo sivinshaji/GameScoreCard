@@ -75,16 +75,17 @@
                     <div class="draw-card-container">
                         <h3 id="draw-cards"></h3>
                         <h5 id="my-cards">Start Game</h5>
+                        <h5 id="my-card-value">Hand Value</h5>
                     </div>
                     <div class="point-card">
-                        <p id="bet-points">Bet points: <span id="bet-value">10</span></p>
-                        <p id="current-points">My points: <span id="current-value">40</span></p>
+                        <p id="bet-points">Bet points: <span id="bet-value">-</span></p>
+                        <p id="current-points">My points: <span id="current-value">-</span></p>
                     </div>
                 </div>
                 <div id="user-option-card">
-                    <button class="btn-place-bet">Raise Point</button>
-                    <button class="btn-pass-chance">Show Cards</button>
-                    <button class="btn-drop-game">Draw Card</button>
+                    <button class="btn-place-bet hidden" onclick="raiseBet()">Raise Bet</button>
+                    <button class="btn-drop-game hidden" onclick="drawCard()">Draw Card</button>
+                    <button class="btn-pass-chance hidden" onclick="checkBlackjack()">Show Cards</button>
                 </div>
             </div>
         </div>

@@ -34,56 +34,50 @@ function resetScore()
 }
 
 //Blackjack Game functions
+let GameState = false
+let PlayerCards = []
+let ComCards = []
+let sumPlayerCard = 0;
+let sumComCard = 0;
+let btn 
+let playerbetpoints = 0
+let totalPlayerPoint = 50
+let totalComPoint = 50
+let combetpoints = 0
 
 function Blackjack(state)
 {
-    let GameState = state
-    let PlayerCards = []
-    let ComCards = []
-    let sumPlayerCard = 0;
-    let sumComCard = 0;
-
-
+    GameState = state
+    playerbetpoints = 10
+    combetpoints = 10
+    document.getElementById('bet-value').innerText = playerbetpoints
+    document.getElementById('current-value').innerText = totalPlayerPoint
     if(GameState)
     {
+        GameState = false
+        PlayerCards = []
+        ComCards = []
+        sumPlayerCard = 0;
+        sumComCard = 0;
         // First two card selection
         PlayerCards.push(randomCardSelector())
         PlayerCards.push(randomCardSelector())
         ComCards.push(randomCardSelector())
         ComCards.push(randomCardSelector())
-
+        //sum of first two cards
         PlayerCards.forEach(n => {
             sumPlayerCard += n
         })
         ComCards.forEach(n => {
             sumComCard += n
         })
-        
-        if(sumPlayerCard == 21 && sumComCard == 21)
-        {
-            document.getElementById('draw-cards').innerText = "Draw"
-        }
-        else if(sumPlayerCard == 21 || sumComCard > 21)
-        {
-            document.getElementById('draw-cards').innerText = `BlackJack You Win\nYour Cards: ${sumPlayerCard}\n Player Cards: ${sumComCard}`
-        }
-        else if(sumComCard == 21 || sumPlayerCard > 21)
-        {
-            document.getElementById('draw-cards').innerText = `BlackJack COM Win\nYour Cards: ${sumPlayerCard}\n Player Cards: ${sumComCard}`
-        }
-        else
-        {
-            document.getElementById('draw-cards').innerText = "Raise Bet or Show Card"
-        }
-
-        console.log(`Player Card Sum: ${sumPlayerCard} and Comp Card Sum: ${sumComCard}`);
-        document.getElementById('my-cards').innerText = `Your Cards: ${PlayerCards.toString(PlayerCards)}`
+        //check initial blackjack
+        checkBlackjack()
     }
     else
     {
         GameState = false
     }
-    
     
 }
 
@@ -94,49 +88,132 @@ function randomCardSelector()
     return num
 }
 
-//View Card
-function viewPlayerCards()
+
+
+//Draw card
+function drawCard()
 {
-    PlayerValueCards.forEach(n => {
-        document.getElementById('draw-cards').innerText += n + "-"
-    })
+    PlayerCards.push(randomCardSelector())
+    ComCards.push(randomCardSelector())
+        //sum cards with new cards
+        sumPlayerCard = 0
+        sumComCard = 0
+        PlayerCards.forEach(n => {
+            sumPlayerCard += n
+        })
+        ComCards.forEach(n => {
+            sumComCard += n
+        })
+        updateMessage()
+        console.log(`My Card Value: ${sumPlayerCard} Com Card Value: ${sumComCard}`)
 }
 
-//Array Challenge Methods
-
-/* let myArray = [5, 4, 2, 10, 15, 5];
-console.log(myArray.length)
-// Challenge 1
-function sumOfArray()
+//Rais bet value
+function raiseBet()
 {
-    let sum = 0;
-    myArray.forEach(n => {
-        sum += n;
-    });
-    document.getElementById("sum-result").innerText = sum + " Challenge Completed!"
+    playerbetpoints += 10
+    combetpoints += 10
+    document.getElementById('bet-value').innerText = `${playerbetpoints}`
 }
 
-// Challenge 2
-
-function findBiggest()
+//Update Messages
+function updateMessage()
 {
-    let maxNum = 0;
-    maxNum = Math.max(...myArray);
-    document.getElementById('biggest-num').innerText =" Max num:" + maxNum + " Challenge Completed!"
+    document.getElementById('my-cards').innerText = `Your Cards: ${PlayerCards.toString(PlayerCards)}`
+    document.getElementById('my-card-value').innerText = `Hand Value: ${sumPlayerCard}`
 }
 
-// Challenge 3
-
-function arrayFilter()
+//Check Blackjack
+function checkBlackjack()
 {
-    let newArrayData =[];
-    newArrayData = myArray.filter((n) =>{
-        if(n%2 == 0)
+    
+    if(sumPlayerCard === 21 && sumComCard === 21)
+    {
+        document.getElementById('draw-cards').innerText = "Draw"
+        updateMessage()
+        btn = document.getElementsByClassName('btn-place-bet')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-pass-chance')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-drop-game')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-startgame')[0]
+        btn.classList.remove("hidden")
+    }
+    else if(sumPlayerCard === 21 || sumComCard === 21)
+    {
+        if (sumPlayerCard === 21)
         {
-            return n;
+            totalPlayerPoint = totalPlayerPoint + playerbetpoints + combetpoints
+            totalComPoint = totalComPoint - combetpoints;
+            document.getElementById('bet-value').innerText = playerbetpoints
+            document.getElementById('current-value').innerText = totalPlayerPoint
         }
-    })
-    console.log(newArrayData);
-    document.getElementById('new-array').innerText =" Even Array: [" + newArrayData + "] Challenge Completed!"
+        else
+        {
+            totalComPoint = totalComPoint + playerbetpoints + combetpoints
+            totalPlayerPoint = totalPlayerPoint - playerbetpoints;
+            document.getElementById('bet-value').innerText = playerbetpoints
+            document.getElementById('current-value').innerText = totalPlayerPoint
+        }
+        document.getElementById('draw-cards').innerText = "B L A C K j A C K"
+        updateMessage()
+        btn = document.getElementsByClassName('btn-place-bet')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-pass-chance')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-drop-game')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-startgame')[0]
+        btn.classList.remove("hidden")
+    }
+    else if(sumComCard > 21)
+    {
+        document.getElementById('draw-cards').innerText = `B L A C K j A C K\nPlayer Wins`
+        updateMessage()
+        btn = document.getElementsByClassName('btn-place-bet')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-pass-chance')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-drop-game')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-startgame')[0]
+        btn.classList.remove("hidden")
+        totalPlayerPoint = totalPlayerPoint + playerbetpoints + combetpoints
+        totalComPoint = totalComPoint - combetpoints;
+        document.getElementById('bet-value').innerText = playerbetpoints
+        document.getElementById('current-value').innerText = totalPlayerPoint
+
+    }
+    else if(sumPlayerCard > 21)
+    {
+        document.getElementById('draw-cards').innerText = `B L A C K j A C K\nCOM Wins`
+        updateMessage()
+        btn = document.getElementsByClassName('btn-place-bet')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-pass-chance')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-drop-game')[0]
+        btn.classList.add("hidden")
+        btn = document.getElementsByClassName('btn-startgame')[0]
+        btn.classList.remove("hidden")
+        totalComPoint = totalComPoint + playerbetpoints + combetpoints
+        totalPlayerPoint = totalPlayerPoint - playerbetpoints;
+        document.getElementById('bet-value').innerText = playerbetpoints
+        document.getElementById('current-value').innerText = totalPlayerPoint
+    }
+    else
+    {
+        document.getElementById('draw-cards').innerText = "Raise the Bet or Show Card"
+        updateMessage()
+        btn = document.getElementsByClassName('btn-place-bet')[0]
+        btn.classList.remove("hidden")
+        btn = document.getElementsByClassName('btn-pass-chance')[0]
+        btn.classList.remove("hidden")
+        btn = document.getElementsByClassName('btn-drop-game')[0]
+        btn.classList.remove("hidden")
+        btn = document.getElementsByClassName('btn-startgame')[0]
+        btn.classList.add("hidden")
+    }
+    console.log(`My Card Value: ${sumPlayerCard} Com Card Value: ${sumComCard}`)
 }
-*/
